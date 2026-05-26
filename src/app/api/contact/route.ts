@@ -3,6 +3,10 @@ import { z } from 'zod'
 import { rateLimit } from '@/lib/rateLimit'
 import { sanitizePayload, sanitizeEmail } from '@/lib/sanitize'
 
+// Allows static export (GitHub Pages). The route won't execute on static hosts —
+// server-side features (rate limiting, email) only run on Vercel/Node.js.
+export const dynamic = 'force-static'
+
 const schema = z.object({
   name: z.string().min(2).max(100),
   email: z.string().email(),

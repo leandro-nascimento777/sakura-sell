@@ -24,7 +24,7 @@ const BLOCKED_USER_AGENTS = [
 
 const MAX_BODY_SIZE_BYTES = 10_240 // 10 KB
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const ua = request.headers.get('user-agent') ?? ''
 
   // 1. Block known vulnerability scanners
