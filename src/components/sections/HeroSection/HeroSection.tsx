@@ -19,11 +19,14 @@ export function HeroSection() {
 
       {/* Gradient overlay — blends canvas with site palette */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0D0D1A]/90 via-[#1A0D2E]/75 to-[#0D1A2E]/85" />
-        {/* Radial vignette — darkens edges so canvas is subtle near the frame */}
+        {/* Soft dark base — preserves globe visibility in center */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0D0D1A]/80 via-[#1A0D2E]/55 to-[#0D1A2E]/75" />
+        {/* Vignette — fades globe at edges, keeps center vivid */}
         <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, #0D0D1A 100%)'
+          background: 'radial-gradient(ellipse 90% 80% at 50% 50%, transparent 20%, rgba(13,13,26,0.88) 100%)'
         }} />
+        {/* Left panel darkening — ensures text is always legible */}
+        <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#0D0D1A]/70 to-transparent" />
         <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-pink-500/8 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-80 sm:h-80 bg-purple-600/8 rounded-full blur-3xl" />
       </motion.div>
