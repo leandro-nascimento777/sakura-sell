@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { WhatsAppMock } from '@/components/common/WhatsAppMock'
+import { AirTrafficCanvas } from '@/components/common/AirTrafficCanvas'
 import { fadeInUp, staggerChildren } from '@/lib/motion-variants'
 import { siteConfig } from '@/config/site'
 
@@ -13,11 +14,18 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
-      {/* Background */}
+      {/* Air traffic control canvas — lowest layer */}
+      <AirTrafficCanvas />
+
+      {/* Gradient overlay — blends canvas with site palette */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0D0D1A] via-[#1A0D2E] to-[#0D1A2E]" />
-        <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-pink-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-80 sm:h-80 bg-purple-600/10 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0D0D1A]/90 via-[#1A0D2E]/75 to-[#0D1A2E]/85" />
+        {/* Radial vignette — darkens edges so canvas is subtle near the frame */}
+        <div className="absolute inset-0" style={{
+          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, #0D0D1A 100%)'
+        }} />
+        <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-pink-500/8 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-80 sm:h-80 bg-purple-600/8 rounded-full blur-3xl" />
       </motion.div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24 w-full">
